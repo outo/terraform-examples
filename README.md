@@ -13,6 +13,7 @@ secret_key = "<paste your secret key here>"
 
 Examples use AWS to create resources which may incur a charge!
 
+
 #Particulars
 ##ec2-simple-provisioning
 
