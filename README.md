@@ -1,9 +1,9 @@
-#Summary
+# Summary
 
 Examples of using terraform
 
 
-#Setup
+# Setup
 Create a file called `terraform.tfvars` under the particular example's root directory
 ```
 access_key = "<paste your access key id here>"
@@ -14,8 +14,8 @@ secret_key = "<paste your secret key here>"
 Examples use AWS to create resources which may incur a charge!
 
 
-#Particulars
-##ec2-simple-provisioning
+# Particulars
+## ec2-simple-provisioning
 
 Creates an AWS EC2 instance with wide open security group and demonstrates simple provisioning with nothing else but much else than terraform and bash. 
 
