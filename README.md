@@ -17,7 +17,7 @@ Examples use AWS to create resources which may incur a charge!
 # Particulars
 ## ec2-simple-provisioning
 
-Creates an AWS EC2 instance with wide open security group and demonstrates simple provisioning with nothing else but much else than terraform and bash. 
+Creates an AWS EC2 instance with wide open security group and demonstrates simple provisioning with not much else than terraform and bash. 
 
 Create with
 
