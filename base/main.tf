@@ -10,10 +10,18 @@ resource "aws_vpc" "main" {
   cidr_block = "${var.vpc_cidr}"
   enable_dns_support = true
   enable_dns_hostnames = true
+
+  tags {
+    Name = "${var.tag_name}-vpc"
+  }
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = "${aws_vpc.main.id}"
+
+  tags {
+    Name = "${var.tag_name}-internetgateway"
+  }
 }
 
 resource "aws_subnet" "public" {
@@ -22,6 +30,11 @@ resource "aws_subnet" "public" {
   vpc_id = "${aws_vpc.main.id}"
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
   map_public_ip_on_launch = true
+
+  tags {
+    Name = "${var.tag_name}-subnet"
+  }
+
 }
 
 resource "aws_subnet" "private" {
@@ -29,12 +42,19 @@ resource "aws_subnet" "private" {
   cidr_block = "${cidrsubnet(aws_vpc.main.cidr_block, 8, count.index + 5)}"
   vpc_id = "${aws_vpc.main.id}"
   availability_zone = "${data.aws_availability_zones.available.names[count.index]}"
+
+  tags {
+    Name = "${var.tag_name}-subnet"
+  }
 }
 
 # network/routing/public
 
 resource "aws_route_table" "public" {
   vpc_id = "${aws_vpc.main.id}"
+  tags {
+    Name = "${var.tag_name}-routetable"
+  }
 }
 
 resource "aws_route" "public" {
@@ -65,6 +85,9 @@ resource "aws_nat_gateway" "private" {
 resource "aws_route_table" "private" {
   count = "${var.az_count}"
   vpc_id = "${aws_vpc.main.id}"
+  tags {
+    Name = "${var.tag_name}-routetable"
+  }
 }
 
 resource "aws_route" "private" {
@@ -91,7 +114,6 @@ resource "aws_launch_configuration" "bastion" {
   security_groups = [
     "${aws_security_group.bastion.id}"
   ]
-
 }
 
 resource "aws_autoscaling_group" "bastion" {
