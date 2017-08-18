@@ -1,2 +1,2 @@
-bundle
+bundle/*
 !bundle/install_remotely.sh
